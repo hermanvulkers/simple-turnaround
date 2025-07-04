@@ -29,5 +29,8 @@ jobs:
 
       - name: Build and push frontend
         run: |
-          docker build -t ghcr.io/hermanvulkers/k8s-microblog-frontend:latest -f Dockerfile.frontend frontend/
+          docker build \
+            --build-arg VITE_API_URL=http://microblog-backend:3000 \
+            -t ghcr.io/hermanvulkers/k8s-microblog-frontend:latest \
+            -f Dockerfile.frontend frontend/
           docker push ghcr.io/hermanvulkers/k8s-microblog-frontend:latest
