@@ -1,9 +1,19 @@
+# 1. Base image
 FROM node:20-alpine
 
+# 2. Set working directory
 WORKDIR /app
+
+# 3. Copy package files & install deps
 COPY package*.json ./
 RUN npm install
+
+# 4. Copy rest of app
 COPY . .
 
-EXPOSE 3001
-CMD ["node", "index.js"]
+# 5. Build NestJS app
+RUN npm run build
+
+# 6. Expose port & run
+EXPOSE 3000
+CMD ["node", "dist/main"]

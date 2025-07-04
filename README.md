@@ -72,7 +72,7 @@ kubectl apply -f k8s/
 In two terminals:
 
 ```bash
-kubectl port-forward svc/backend 3001:3001
+kubectl port-forward svc/backend 3000:3000
 ```
 
 ```bash
