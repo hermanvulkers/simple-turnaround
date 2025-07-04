@@ -21,7 +21,7 @@ Built to gain hands-on experience with Kubernetes, containerization, and infrast
 
 ✅ Setting up a local Kubernetes cluster  
 ✅ Dockerizing frontend and backend  
-✅ Kubernetes Deployments, Services, and port forwarding  
+✅ Kubernetes Deployments, Services and port forwarding  
 ✅ Understanding of container runtimes like `containerd`  
 ✅ Separation of concerns between infra (Kind), control (kubectl), and packaging (Helm)
 
