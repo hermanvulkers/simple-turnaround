@@ -1,0 +1,15 @@
+frontend:
+  image:
+    repository: microblog-frontend
+    tag: latest
+  service:
+    port: 80
+
+backend:
+  image:
+    repository: microblog-backend
+    tag: latest
+  service:
+    port: 3001
+
+replicaCount: 1
