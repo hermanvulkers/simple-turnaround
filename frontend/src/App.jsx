@@ -5,12 +5,20 @@ function App() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await fetch("http://localhost:3000/posts");
-      const data = await res.json();
-      setPosts(data);
+      const baseUrl = import.meta.env.DEV ? "http://localhost:3000" : import.meta.env.VITE_API_URL;
+
+      try {
+        const res = await fetch(`${baseUrl}/posts`);
+        const data = await res.json();
+        setPosts(data);
+      } catch (err) {
+        console.error("Failed to fetch posts:", err);
+      }
     };
+
     fetchPosts();
   }, []);
+
 
   return (
     <div>
