@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: microblog-frontend
 spec:
+  type: LoadBalancer
   selector:
     app: microblog-frontend
   ports:

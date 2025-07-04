@@ -1,15 +1,17 @@
+replicaCount: 1
+
 frontend:
   image:
-    repository: microblog-frontend
+    repository: ghcr.io/hermanvulkers/k8s-microblog-frontend
     tag: latest
+  imagePullPolicy: Always
   service:
     port: 80
 
 backend:
   image:
-    repository: microblog-backend
+    repository: ghcr.io/hermanvulkers/k8s-microblog-backend
     tag: latest
+  imagePullPolicy: Always
   service:
     port: 3001
-
-replicaCount: 1
