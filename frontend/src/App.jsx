@@ -15,11 +15,11 @@ function App() {
       <button
         className="turnaround-button"
         onClick={async () => {
-          await fetch("/turnarounds", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: "Test turnaround" }),
-          });
+         await fetch((import.meta.env.DEV ? "http://localhost:3000" : "http://172.201.33.227:3000") + "/turnarounds", {
+           method: "POST",
+           headers: { "Content-Type": "application/json" },
+           body: JSON.stringify({ message: "Test turnaround" }),
+         });
         }}
       >
         🚀 Send Test Kafka Event
