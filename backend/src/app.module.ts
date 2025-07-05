@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 
 import { PubSubModule } from './core/pubsub/pubsub.module';
+import { StatusResolver } from './core/status.resolver';
 import { TurnaroundModule } from './turnarounds/turnaround.module';
 
 @Module({
@@ -11,11 +12,12 @@ import { TurnaroundModule } from './turnarounds/turnaround.module';
       driver: ApolloDriver,
       autoSchemaFile: true,
       subscriptions: {
-        'graphql-ws': true, 
+        'graphql-ws': true,
       },
     }),
     PubSubModule,
     TurnaroundModule,
   ],
+  providers: [StatusResolver],
 })
 export class AppModule {}
