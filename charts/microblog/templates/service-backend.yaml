@@ -4,7 +4,7 @@ metadata:
   name: microblog-backend
   annotations:
     service.beta.kubernetes.io/azure-load-balancer-resource-group: microblog-rg
-    service.beta.kubernetes.io/azure-load-balancer-ip: 172.201.33.227
+    service.beta.kubernetes.io/azure-load-balancer-ip: 132.220.176.92
 spec:
   type: LoadBalancer
   selector:
