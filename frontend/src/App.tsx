@@ -1,10 +1,14 @@
+import React, { useEffect, useState } from 'react';
 import './App.css';
-import { useTurnaroundSocket } from './hooks/useTurnaroundSocket';
+import { TurnaroundEvent, useTurnaroundSubscription } from './hooks/useTurnaroundSubscription';
 
 function App() {
-  const events = useTurnaroundSocket();
+  const [events, setEvents] = useState<TurnaroundEvent[]>([]);
+  const newEvent = useTurnaroundSubscription();
 
-  console.log(events);
+  useEffect(() => {
+    if (newEvent) setEvents(prev => [...prev, newEvent]);
+  }, [newEvent]);
 
   return (
     <div className="app-container">

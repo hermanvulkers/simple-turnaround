@@ -1,24 +1,34 @@
-import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  OnModuleDestroy,
+  OnModuleInit,
+} from '@nestjs/common';
+import { PubSub } from 'graphql-subscriptions';
 import { Consumer, Kafka, Producer } from 'kafkajs';
-import { WsGateway } from '../websocket/websocket.gateway';
+import { TurnaroundEvent } from '../../turnarounds/entities/turnaround-event.entity';
 
 @Injectable()
 export class KafkaService implements OnModuleInit, OnModuleDestroy {
-  private kafka = new Kafka({
+  private readonly kafka = new Kafka({
     clientId: 'turnaround-backend',
-    brokers: [process.env.KAFKA_BROKER || 'localhost:9092'],
+    brokers: [process.env.KAFKA_BROKER ?? 'localhost:9092'],
   });
 
-  private producer: Producer = this.kafka.producer();
-  private consumer: Consumer = this.kafka.consumer({
+  private readonly producer: Producer = this.kafka.producer();
+  private readonly consumer: Consumer = this.kafka.consumer({
     groupId: 'frontend-group',
   });
 
-  constructor(private gateway: WsGateway) {}
+  constructor(
+    @Inject('PUB_SUB')
+    private readonly pubSub: PubSub<{ TURNAROUND_UPDATED: TurnaroundEvent }>,
+  ) {}
 
   async onModuleInit() {
     await this.producer.connect();
     await this.consumer.connect();
+
     await this.consumer.subscribe({
       topic: 'turnaround-events',
       fromBeginning: false,
@@ -26,12 +36,14 @@ export class KafkaService implements OnModuleInit, OnModuleDestroy {
 
     await this.consumer.run({
       eachMessage: async ({ message }) => {
-        const data = message.value?.toString();
-        console.log('Received event in Kafka consumer:', data);
+        const json = message.value?.toString();
+        if (!json) return;
 
-        if (data) {
-          this.gateway.sendUpdateToClients(data);
-        }
+        const event: TurnaroundEvent = JSON.parse(json) as TurnaroundEvent;
+
+        console.log('Received event in Kafka consumer:', event);
+
+        await this.pubSub.publish('TURNAROUND_UPDATED', event);
       },
     });
   }
