@@ -22,14 +22,18 @@ function App() {
 
   return (
     <div>
-      <h1>Microblog</h1>
-      <ul>
-        {posts.map((p) => (
-          <li key={p.id}>
-            <strong>{p.title}</strong>: {p.content}
-          </li>
-        ))}
-      </ul>
+      <button
+        onClick={async () => {
+          const baseUrl = import.meta.env.DEV ? "http://localhost:3000" : import.meta.env.VITE_API_URL;
+          await fetch(`${baseUrl}/turnarounds`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: "Test turnaround" }),
+          });
+        }}
+      >
+        Send Test Kafka Event
+      </button>
     </div>
   );
 }

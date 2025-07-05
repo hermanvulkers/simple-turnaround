@@ -53,7 +53,7 @@ jobs:
         run: |
           az aks get-credentials \
             --resource-group microblog-rg \
-            --name microblog-aks \
+            --name microblog-cluster \
             --overwrite-existing
 
       - name: Deploy to AKS with Helm
