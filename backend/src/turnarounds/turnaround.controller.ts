@@ -1,5 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { KafkaService } from '../kafka/kafka.service';
+import { KafkaService } from '../core/kafka/kafka.service';
 
 @Controller('turnarounds')
 export class TurnaroundController {

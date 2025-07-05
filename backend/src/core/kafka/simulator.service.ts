@@ -12,7 +12,7 @@ const TURNAROUND_STEPS = [
 ];
 
 @Injectable()
-export class EventSimulatorService implements OnModuleInit {
+export class SimulatorService implements OnModuleInit {
   constructor(private kafkaService: KafkaService) {}
 
   onModuleInit() {
