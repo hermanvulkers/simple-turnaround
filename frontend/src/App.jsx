@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="app-container">
       <div className="header-section">
-        <h1 className="app-title">✈️ Schiphol Turnaround</h1>
+        <h1 className="app-title">✈️ Simple Turnaround</h1>
         <p className="app-subtitle">Monitor real-time aircraft turnaround events</p>
       </div>
 
