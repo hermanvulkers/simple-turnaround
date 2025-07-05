@@ -27,7 +27,7 @@ export class KafkaService implements OnModuleInit, OnModuleDestroy {
     await this.consumer.run({
       eachMessage: async ({ message }) => {
         const data = message.value?.toString();
-        console.log('Received event:', data);
+        console.log('Received event in Kafka consumer:', data);
 
         if (data) {
           this.gateway.sendUpdateToClients(data);
