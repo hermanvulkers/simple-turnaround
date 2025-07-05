@@ -57,6 +57,10 @@ jobs:
             --resource-group microblog-rg \
             --name microblog-cluster \
             --overwrite-existing
+            
+      - name: Deploy Kafka cluster
+        run: |
+          kubectl apply -f kafka/kafka-stack.yaml
 
       - name: Deploy to AKS with Helm
         run: |
