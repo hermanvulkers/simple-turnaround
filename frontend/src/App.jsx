@@ -2,7 +2,6 @@ import './App.css';
 
 function App() {
   
-  const baseUrl = "http://localhost:3000";
 
   return (
     <div className="app-container">
@@ -18,7 +17,7 @@ function App() {
       <button
         className="turnaround-button"
         onClick={async () => {
-          await fetch(`${baseUrl}/turnarounds`, {
+          await fetch("/turnarounds", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ message: "Test turnaround" }),
