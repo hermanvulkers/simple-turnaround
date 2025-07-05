@@ -2,13 +2,16 @@ import { WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
 import { Server } from 'socket.io';
 
 @WebSocketGateway({
-  cors: { origin: '*' },
+  cors: {
+    origin: '*',
+  },
 })
 export class WsGateway {
   @WebSocketServer()
-  server!: Server;
+  server: Server;
 
-  sendUpdateToClients(data: string): void {
-    this.server.emit('turnaround-event', data);
+  sendUpdateToClients(data: string | object) {
+    const payload = typeof data === 'string' ? JSON.parse(data) : data;
+    this.server.emit('turnaround', payload);
   }
 }
