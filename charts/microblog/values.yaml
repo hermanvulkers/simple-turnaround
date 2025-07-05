@@ -15,3 +15,5 @@ backend:
   imagePullPolicy: Always
   service:
     port: 3000
+  kafkaBroker: my-cluster-kafka-bootstrap.kafka.svc:9092
+

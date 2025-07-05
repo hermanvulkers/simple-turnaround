@@ -18,3 +18,4 @@ spec:
           imagePullPolicy: {{ .Values.frontend.imagePullPolicy }}
           ports:
             - containerPort: 80
+          
