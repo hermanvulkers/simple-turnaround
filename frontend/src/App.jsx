@@ -1,30 +1,23 @@
-import { useEffect, useState } from "react";
+import './App.css';
 
 function App() {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const baseUrl = import.meta.env.DEV ? "http://localhost:3000" : import.meta.env.VITE_API_URL;
-
-      try {
-        const res = await fetch(`${baseUrl}/posts`);
-        const data = await res.json();
-        setPosts(data);
-      } catch (err) {
-        console.error("Failed to fetch posts:", err);
-      }
-    };
-
-    fetchPosts();
-  }, []);
-
+  
+  const baseUrl = "http://localhost:3000";
 
   return (
-    <div>
+    <div className="app-container">
+      <div className="header-section">
+        <h1 className="app-title">
+          ✈️ Schiphol Turnaround
+        </h1>
+        <p className="app-subtitle">
+          Monitor real-time aircraft turnaround events
+        </p>
+      </div>
+      
       <button
+        className="turnaround-button"
         onClick={async () => {
-          const baseUrl = import.meta.env.DEV ? "http://localhost:3000" : import.meta.env.VITE_API_URL;
           await fetch(`${baseUrl}/turnarounds`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -32,7 +25,7 @@ function App() {
           });
         }}
       >
-        Send Test Kafka Event
+        🚀 Send Test Kafka Event
       </button>
     </div>
   );
