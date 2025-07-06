@@ -22,7 +22,6 @@ export class SimulatorService implements OnModuleInit {
   private startSimulation() {
     setInterval(() => {
       const flightId = this.randomFlightId();
-      const now = new Date();
 
       TURNAROUND_STEPS.forEach((step, index) => {
         setTimeout(() => {

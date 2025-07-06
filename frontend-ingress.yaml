@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend-ingress
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"  # tls komt later
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: hermanvulkers.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: microblog-frontend
+                port:
+                  number: 80
+    - host: www.hermanvulkers.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: microblog-frontend
+                port:
+                  number: 80
