@@ -16,21 +16,24 @@ function App() {
     <div className="app-container">
       <div className="header-section">
         <h1 className="app-title">✈️ Simple Turnaround</h1>
-        <p className="app-subtitle">Monitor real-time aircraft turnaround events</p>
+        <p className="app-subtitle">Monitor (fake) real-time aircraft turnaround events</p>
       </div>
 
       <button
         className="turnaround-button"
         onClick={async () => {
-          await fetch((import.meta.env.DEV ? 'http://localhost:3000' : 'http://132.220.176.92:3000') + '/turnarounds', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              flightId: 'KL123',
-              type: 'Refueling',
-              timestamp: new Date().toISOString(),
-            }),
-          });
+          await fetch(
+            (import.meta.env.DEV ? 'http://localhost:3000' : 'https://www.hermanvulkers.com') + '/turnarounds',
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                flightId: 'KL123',
+                type: 'Refueling',
+                timestamp: new Date().toISOString(),
+              }),
+            },
+          );
         }}
       >
         🚀 Send Test Kafka Event
