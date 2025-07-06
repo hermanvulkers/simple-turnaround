@@ -36,7 +36,7 @@ export class SimulatorService implements OnModuleInit {
             .catch(console.error);
         }, index * 6000);
       });
-    }, 60000);
+    }, 15000);
   }
 
   private randomFlightId() {
