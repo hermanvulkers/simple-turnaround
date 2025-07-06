@@ -22,7 +22,7 @@ export class KafkaService implements OnModuleInit, OnModuleDestroy {
 
   constructor(
     @Inject('PUB_SUB')
-    private readonly pubSub: PubSub<{ TURNAROUND_UPDATED: TurnaroundEvent }>,
+    private readonly pubSub: PubSub,
   ) {}
 
   async onModuleInit() {
@@ -43,7 +43,9 @@ export class KafkaService implements OnModuleInit, OnModuleDestroy {
 
         console.log('Received event in Kafka consumer:', event);
 
-        await this.pubSub.publish('TURNAROUND_UPDATED', event);
+        await this.pubSub.publish('TURNAROUND_UPDATED', {
+          turnaroundUpdated: event,
+        });
       },
     });
   }
