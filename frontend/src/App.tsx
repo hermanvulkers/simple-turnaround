@@ -40,7 +40,12 @@ function App() {
       <ul style={{ marginTop: 24 }}>
         {events.map((ev, index) => (
           <li key={index}>
-            {ev.flightId} – {ev.type} @ {new Date(ev.timestamp).toLocaleTimeString()}
+            {ev.flightId} – {ev.type} @{' '}
+            {new Date(ev.timestamp).toLocaleTimeString('nl-NL', {
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+            })}
           </li>
         ))}
       </ul>

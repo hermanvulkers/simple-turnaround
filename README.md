@@ -1,6 +1,6 @@
 # ✈️ Schiphol Turnaround Monitor
 
-A real-time aircraft turnaround monitoring system built with modern web technologies and deployed on Kubernetes.  
+A (fake) real-time aircraft turnaround monitoring system built with modern web technologies and deployed on Kubernetes.  
 This project demonstrates real-time event processing with Kafka, GraphQL subscriptions, and WebSocket communication.
 
 > **Note**: This tinkering project was originally named "microblog" but has evolved into a (fake) real-time aircraft turnaround monitoring system. The name "microblog" is still used in some Kubernetes resources and Helm charts due to existing AKS (Azure Kubernetes Service) deployments that are cumbersome to rename. The application itself is now called "Simple Turnaround".

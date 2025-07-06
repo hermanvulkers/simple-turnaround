@@ -29,7 +29,7 @@ export class SimulatorService implements OnModuleInit {
           const event = {
             flightId,
             type: step,
-            timestamp: new Date(now.getTime() + index * 2000).toISOString(),
+            timestamp: new Date().toISOString(),
           };
 
           this.kafkaService
