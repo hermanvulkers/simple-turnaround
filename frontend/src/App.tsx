@@ -8,8 +8,6 @@ function App() {
 
   useEffect(() => {
     if (newEvent) {
-      console.log('✅ New event in frontend:', newEvent);
-
       setEvents((prev) => [...prev, newEvent]);
     }
   }, [newEvent]);

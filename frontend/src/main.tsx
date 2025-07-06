@@ -10,16 +10,12 @@ import App from './App.tsx';
 import './index.css';
 
 const httpLink = new HttpLink({
-  uri: import.meta.env.DEV
-    ? 'http://localhost:3000/graphql'
-    : 'http://132.220.176.92:3000/graphql',
+  uri: import.meta.env.DEV ? 'http://localhost:3000/graphql' : 'https://www.hermanvulkers.com/graphql',
 });
 
 const wsLink = new GraphQLWsLink(
   createClient({
-    url: import.meta.env.DEV
-      ? 'ws://localhost:3000/graphql'
-      : 'ws://132.220.176.92:3000/graphql',
+    url: import.meta.env.DEV ? 'ws://localhost:3000/graphql' : 'wss://www.hermanvulkers.com/graphql',
   }),
 );
 
