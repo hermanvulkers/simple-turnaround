@@ -34,7 +34,7 @@ export class SimulatorService implements OnModuleInit {
           this.kafkaService
             .send('turnaround-events', event)
             .catch(console.error);
-        }, index * 8000);
+        }, index * 6000);
       });
     }, 60000);
   }

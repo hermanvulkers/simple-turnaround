@@ -36,7 +36,7 @@ function App() {
           );
         }}
       >
-        🚀 Send Test Kafka Event
+        🚀 Trigger Kafka Event
       </button>
       <ul style={{ marginTop: 24 }}>
         {events.map((ev, index) => (
