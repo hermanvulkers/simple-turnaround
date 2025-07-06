@@ -7,7 +7,11 @@ function App() {
   const newEvent = useTurnaroundSubscription();
 
   useEffect(() => {
-    if (newEvent) setEvents(prev => [...prev, newEvent]);
+    if (newEvent) {
+      console.log('✅ New event in frontend:', newEvent);
+
+      setEvents((prev) => [...prev, newEvent]);
+    }
   }, [newEvent]);
 
   return (
@@ -20,12 +24,12 @@ function App() {
       <button
         className="turnaround-button"
         onClick={async () => {
-          await fetch((import.meta.env.DEV ? "http://localhost:3000" : "http://132.220.176.92:3000") + "/turnarounds", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
+          await fetch((import.meta.env.DEV ? 'http://localhost:3000' : 'http://132.220.176.92:3000') + '/turnarounds', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              flightId: "KL123",
-              type: "Refueling",
+              flightId: 'KL123',
+              type: 'Refueling',
               timestamp: new Date().toISOString(),
             }),
           });

@@ -46,6 +46,8 @@ export class KafkaService implements OnModuleInit, OnModuleDestroy {
         await this.pubSub.publish('TURNAROUND_UPDATED', {
           turnaroundUpdated: event,
         });
+
+        console.log('🔁 Publishing to TURNAROUND_UPDATED', event);
       },
     });
   }

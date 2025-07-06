@@ -12,6 +12,8 @@ export class TurnaroundResolver {
 
   @Subscription(() => TurnaroundEvent, { name: 'turnaroundUpdated' })
   turnaroundUpdated(): AsyncIterableIterator<TurnaroundEvent> {
+    console.log('🚀 Subscribed to TURNAROUND_UPDATED!');
+
     return this.pubSub.asyncIterableIterator('TURNAROUND_UPDATED');
   }
 

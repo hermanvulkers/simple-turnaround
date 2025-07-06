@@ -10,4 +10,7 @@ export class TurnaroundEvent {
 
   @Field()
   timestamp: string;
+
+  @Field({ nullable: true })
+  gate?: string;
 }
