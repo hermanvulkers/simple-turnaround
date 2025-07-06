@@ -13,6 +13,7 @@ import { TurnaroundModule } from './turnarounds/turnaround.module';
       autoSchemaFile: true,
       subscriptions: {
         'graphql-ws': true,
+        'subscriptions-transport-ws': true,
       },
     }),
     PubSubModule,

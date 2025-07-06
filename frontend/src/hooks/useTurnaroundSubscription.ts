@@ -1,4 +1,4 @@
-import { gql, useSubscription } from "@apollo/client";
+import { gql, useSubscription } from '@apollo/client';
 
 export type TurnaroundEvent = {
   flightId: string;
@@ -19,7 +19,11 @@ const TURNAROUND_SUB = gql`
 `;
 
 export const useTurnaroundSubscription = () => {
-  const { data } = useSubscription<{ turnaroundUpdated: TurnaroundEvent }>(TURNAROUND_SUB);
+  const { data, loading, error } = useSubscription<{ turnaroundUpdated: TurnaroundEvent }>(TURNAROUND_SUB);
+
+  console.log('📡 Subscription loading:', loading);
+  console.log('📡 Subscription data:', data);
+  console.log('📡 Subscription error:', error);
 
   return data?.turnaroundUpdated;
 };
