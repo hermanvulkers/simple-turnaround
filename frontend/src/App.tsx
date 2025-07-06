@@ -16,7 +16,7 @@ function App() {
     <div className="app-container">
       <div className="header-section">
         <h1 className="app-title">✈️ Simple Turnaround</h1>
-        <p className="app-subtitle">Monitor (fake) real-time aircraft turnaround events</p>
+        <p className="app-subtitle">Monitor (simulated) real-time aircraft turnaround events</p>
       </div>
 
       <button
