@@ -5,6 +5,11 @@ import { TurnaroundEvent } from './entities/turnaround-event.entity';
 
 @Resolver()
 export class TurnaroundResolver {
+  constructor(
+    @Inject('PUB_SUB')
+    private readonly pubSub: PubSub<{ TURNAROUND_UPDATED: TurnaroundEvent }>,
+  ) {}
+
   @Query(() => String)
   ping(): string {
     return 'pong';
@@ -12,13 +17,7 @@ export class TurnaroundResolver {
 
   @Subscription(() => TurnaroundEvent, { name: 'turnaroundUpdated' })
   turnaroundUpdated(): AsyncIterableIterator<TurnaroundEvent> {
-    console.log('🚀 Subscribed to TURNAROUND_UPDATED!');
-
-    return this.pubSub.asyncIterableIterator('TURNAROUND_UPDATED');
+    console.log('Subscription active for TURNAROUND_UPDATED');
+    return this.pubSub.asyncIterableIterator('TURNAROUND_UPDATED'); // ✅
   }
-
-  constructor(
-    @Inject('PUB_SUB')
-    private readonly pubSub: PubSub<{ TURNAROUND_UPDATED: TurnaroundEvent }>,
-  ) {}
 }
