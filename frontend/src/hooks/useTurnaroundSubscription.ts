@@ -19,11 +19,7 @@ const TURNAROUND_SUB = gql`
 `;
 
 export const useTurnaroundSubscription = () => {
-  const { data, loading, error } = useSubscription<{ turnaroundUpdated: TurnaroundEvent }>(TURNAROUND_SUB);
-
-  console.log('📡 Subscription loading:', loading);
-  console.log('📡 Subscription data:', data);
-  console.log('📡 Subscription error:', error);
+  const { data } = useSubscription<{ turnaroundUpdated: TurnaroundEvent }>(TURNAROUND_SUB);
 
   return data?.turnaroundUpdated;
 };

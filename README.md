@@ -1,40 +1,58 @@
-# 🐳 k8s-microblog
+# ✈️ Schiphol Turnaround Monitor
 
-A fullstack microblog app deployed on a local Kubernetes cluster with Kind.  
-Built to gain hands-on experience with Kubernetes, containerization, and infrastructure management.
+A real-time aircraft turnaround monitoring system built with modern web technologies and deployed on Kubernetes.  
+This project demonstrates real-time event processing with Kafka, GraphQL subscriptions, and WebSocket communication.
+
+> **Note**: This tinkering project was originally named "microblog" but has evolved into a (fake) real-time aircraft turnaround monitoring system. The name "microblog" is still used in some Kubernetes resources and Helm charts due to existing AKS (Azure Kubernetes Service) deployments that are cumbersome to rename. The application itself is now called "Simple Turnaround".
 
 ---
 
 ## 🔧 Stack
 
-| Component        | Technology                |
-| ---------------- | ------------------------- |
-| Frontend         | React + Vite              |
-| Backend          | Node.js + Express         |
-| Cluster          | Kubernetes via Kind       |
-| Containerization | Docker                    |
-| Orchestration    | kubectl + Helm (optional) |
+| Component        | Technology                    |
+| ---------------- | ----------------------------- |
+| Frontend         | React 19 + Vite + TypeScript  |
+| Backend          | NestJS + GraphQL + WebSockets |
+| Database         | Kafka (event streaming)       |
+| Real-time        | GraphQL Subscriptions         |
+| Containerization | Docker                        |
+| Orchestration    | Kubernetes + Helm Charts      |
+| Cluster          | Local development with Kind   |
 
 ---
 
 ## 🎯 What this project demonstrates
 
-✅ Setting up a local Kubernetes cluster  
-✅ Dockerizing frontend and backend  
-✅ Kubernetes Deployments, Services and port forwarding  
-✅ Understanding of container runtimes like `containerd`  
-✅ Separation of concerns between infra (Kind), control (kubectl), and packaging (Helm)
+✅ Real-time event processing with Apache Kafka  
+✅ GraphQL subscriptions for live updates  
+✅ WebSocket communication with Socket.io  
+✅ Modern React with TypeScript and Vite  
+✅ NestJS backend with GraphQL and WebSocket support  
+✅ Kubernetes deployment with Helm charts  
+✅ Event-driven architecture  
+✅ Real-time aircraft turnaround monitoring
 
 ---
 
-## 🚀 Installation (locally with Kind)
+## 🚀 Features
+
+- **Real-time Updates**: Live aircraft turnaround events via GraphQL subscriptions
+- **Event Streaming**: Kafka-based event processing for scalability
+- **WebSocket Support**: Real-time bidirectional communication
+- **Modern UI**: Clean, responsive interface with real-time event display
+- **Kubernetes Ready**: Full containerization and orchestration support
+
+---
+
+## 🚀 Installation & Setup
 
 ### 1. Requirements
 
 - [Docker](https://www.docker.com/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [kind](https://kind.sigs.k8s.io/docs/user/quick-start/)
-- [helm (optional)](https://helm.sh/)
+- [helm](https://helm.sh/)
+- [Node.js](https://nodejs.org/) (for local development)
 
 ### 2. Clone the repo
 
@@ -43,42 +61,116 @@ git clone https://github.com/yourusername/k8s-microblog.git
 cd k8s-microblog
 ```
 
-### 3. Set up the cluster
+### 3. Local Development
+
+#### Backend
+
+```bash
+cd backend
+npm install
+npm run start:dev
+```
+
+#### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+### 4. Kafka Setup (for local development)
+
+```bash
+# Start Kafka with Docker Compose
+docker-compose -f kafka-stack.yaml up -d
+```
+
+### 5. Kubernetes Deployment
+
+#### Set up the cluster
 
 ```bash
 kind create cluster --name microblog
 ```
 
-### 4. Build Docker images
+#### Build and load Docker images
 
 ```bash
-docker build -t microblog-frontend ./frontend
-docker build -t microblog-backend ./backend
+docker build -t microblog-frontend -f Dockerfile.frontend .
+docker build -t microblog-backend -f Dockerfile.backend .
 
 kind load docker-image microblog-frontend --name microblog
 kind load docker-image microblog-backend --name microblog
 ```
 
-### 5. Deploy to Kubernetes
-
-Note: In `k8s/backend.yaml` and `k8s/frontend.yaml`, `imagePullPolicy: Never` is set because we use locally loaded images.
+#### Deploy with Helm
 
 ```bash
-kubectl apply -f k8s/
+helm install microblog ./charts/microblog
 ```
 
-### 6. Open the app
-
-In two terminals:
+#### Port forwarding
 
 ```bash
-kubectl port-forward svc/backend 3000:3000
+kubectl port-forward svc/microblog-backend 3000:3000
+kubectl port-forward svc/microblog-frontend 8080:80
 ```
 
-```bash
-kubectl port-forward svc/frontend 8080:80
+Visit [http://localhost:8080](http://localhost:8080) to see the application.
+
+---
+
+## 📁 Project Structure
+
+```
+k8s-microblog/
+├── backend/                 # NestJS backend
+│   ├── src/
+│   │   ├── core/           # Core services (Kafka)
+│   │   ├── turnarounds/    # Turnaround module
+│   │   └── main.ts         # Application entry point
+│   └── package.json
+├── frontend/               # React frontend
+│   ├── src/
+│   │   ├── hooks/         # Custom React hooks
+│   │   ├── App.tsx        # Main application component
+│   │   └── main.tsx       # Application entry point
+│   └── package.json
+├── charts/                 # Helm charts for Kubernetes
+│   └── microblog/
+├── Dockerfile.backend      # Backend container
+├── Dockerfile.frontend     # Frontend container
+└── kafka-stack.yaml        # Kafka development setup
 ```
 
-Go to [http://localhost:8080](http://localhost:8080)
+---
 
-The frontend fetches data from the backend via a service call to `/posts`.
+## 🔄 Event Flow
+
+1. **Event Generation**: Backend simulator creates turnaround events
+2. **Kafka Processing**: Events are published to Kafka topics
+3. **GraphQL Subscription**: Frontend subscribes to real-time updates
+4. **UI Updates**: Frontend displays live turnaround events
+
+---
+
+## 🛠 Development
+
+### Adding new turnaround events
+
+Events are automatically generated by the simulator service. You can also manually trigger events via the UI button.
+
+### GraphQL Schema
+
+The backend exposes a GraphQL API with subscriptions for real-time turnaround updates.
+
+### Kafka Topics
+
+- `turnaround-events`: Main topic for turnaround event processing
+
+---
+
+## 📝 License
+
+This project is for educational purposes and demonstrates modern web development practices with real-time capabilities.
