@@ -64,9 +64,13 @@ jobs:
 
       - name: Deploy to AKS with Helm
         run: |
-          helm upgrade --install microblog ./charts/microblog \
+          helm upgrade --install microblog ./k8s/charts/microblog \
             --namespace default \
             --create-namespace \
             --set frontend.image.tag=${{ env.TAG }} \
             --set backend.image.tag=${{ env.TAG }} \
             --set backend.kafkaBroker=my-cluster-kafka-bootstrap.kafka.svc:9092
+
+      - name: Deploy Ingress
+        run: |
+          kubectl apply -f k8s/ingress.yaml
