@@ -3,7 +3,7 @@
 A real-time (simulated) aircraft turnaround monitoring system built with modern web technologies and deployed on Kubernetes.  
 This project demonstrates real-time event processing with Kafka, GraphQL subscriptions, and WebSocket communication.
 
-> **Note**: This tinkering project was originally named "microblog" but has evolved into a (fake) real-time aircraft turnaround monitoring system. The name "microblog" is still used in some Kubernetes resources and Helm charts due to existing AKS (Azure Kubernetes Service) deployments that are cumbersome to rename. The application itself is now called "Simple Turnaround".
+> **Note**: This tinkering project was originally named "microblog" but has evolved into a real-time aircraft turnaround monitoring system. The name "microblog" is still used in some Kubernetes resources and Helm charts due to existing AKS (Azure Kubernetes Service) deployments that are cumbersome to rename. The application itself is now called "Simple Turnaround".
 
 ---
 
@@ -196,9 +196,8 @@ The backend exposes a GraphQL API with subscriptions for real-time turnaround up
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST   | `/graphql` | GraphQL API endpoint |
 | WS     | `/graphql` | WebSocket for subscriptions |
-| POST   | `/turnarounds` | REST endpoint for turnaround events |
+| POST   | `/turnarounds` | REST endpoint for manual turnaround events |
 
 ---
 
